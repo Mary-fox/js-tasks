@@ -1,0 +1,31 @@
+const graph = {};
+graph.you = ["alice", "bob", "claire"];
+graph.bob = ["anuj", "peggy"];
+graph.alice = ["peggy"];
+graph.claire = ["thom", "jonny"];
+graph.anuj = [];
+graph.peggy = [];
+graph.thom = [];
+graph.jonny = [];
+
+
+
+const personSeller = name => name[name.length - 1] === "m"
+
+const search = name => {
+    let searchQueue = [...graph[name]]
+    const searched=[]
+    while(searchQueue.length){
+        const personOne = searchQueue.shift()
+            if (searched.indexOf(personOne) === -1) {
+                if (personSeller(personOne)){
+                    console.log(`${personOne} is a mango seller!`);
+                    return true;
+                } searchQueue = searchQueue.concat(graph[personOne])
+                searched.push(personOne)
+            }
+        }
+    
+    return false;
+}
+search("you"); 
